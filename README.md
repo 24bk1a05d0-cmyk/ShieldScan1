@@ -1,3 +1,3 @@
-# `primitive`
+# `react-checkbox`
 
-This is an internal utility, not intended for public usage.
+View docs [here](https://radix-ui.com/primitives/docs/components/checkbox).
