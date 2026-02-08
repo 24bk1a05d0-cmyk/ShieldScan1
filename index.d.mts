@@ -1,50 +1,98 @@
-import * as react_jsx_runtime from 'react/jsx-runtime';
 import * as _radix_ui_react_context from '@radix-ui/react-context';
-import { Scope } from '@radix-ui/react-context';
-import * as React from 'react';
-import { Primitive } from '@radix-ui/react-primitive';
+import React from 'react';
+import { Slot } from '@radix-ui/react-slot';
 
-type ScopedProps<P> = P & {
-    __scopeCheckbox?: Scope;
-};
-declare const createCheckboxScope: _radix_ui_react_context.CreateScope;
-type CheckedState = boolean | 'indeterminate';
-interface CheckboxProviderProps<State extends CheckedState = CheckedState> {
-    checked?: State | boolean;
-    defaultChecked?: State | boolean;
-    required?: boolean;
-    onCheckedChange?(checked: State | boolean): void;
-    name?: string;
-    form?: string;
-    disabled?: boolean;
-    value?: string | number | readonly string[];
-    children?: React.ReactNode;
+type SlotProps$1 = React.ComponentPropsWithoutRef<typeof Slot>;
+interface CollectionProps$1 extends SlotProps$1 {
+    scope: any;
 }
-declare function CheckboxProvider<State extends CheckedState = CheckedState>(props: ScopedProps<CheckboxProviderProps<State>>): react_jsx_runtime.JSX.Element;
-interface CheckboxTriggerProps extends Omit<React.ComponentPropsWithoutRef<typeof Primitive.button>, keyof CheckboxProviderProps> {
-    children?: React.ReactNode;
-}
-declare const CheckboxTrigger: React.ForwardRefExoticComponent<CheckboxTriggerProps & React.RefAttributes<HTMLButtonElement>>;
-type PrimitiveButtonProps = React.ComponentPropsWithoutRef<typeof Primitive.button>;
-interface CheckboxProps extends Omit<PrimitiveButtonProps, 'checked' | 'defaultChecked'> {
-    checked?: CheckedState;
-    defaultChecked?: CheckedState;
-    required?: boolean;
-    onCheckedChange?(checked: CheckedState): void;
-}
-declare const Checkbox: React.ForwardRefExoticComponent<CheckboxProps & React.RefAttributes<HTMLButtonElement>>;
-type PrimitiveSpanProps = React.ComponentPropsWithoutRef<typeof Primitive.span>;
-interface CheckboxIndicatorProps extends PrimitiveSpanProps {
+declare function createCollection$1<ItemElement extends HTMLElement, ItemData = {}>(name: string): readonly [{
+    readonly Provider: React.FC<{
+        children?: React.ReactNode;
+        scope: any;
+    }>;
+    readonly Slot: React.ForwardRefExoticComponent<CollectionProps$1 & React.RefAttributes<HTMLElement>>;
+    readonly ItemSlot: React.ForwardRefExoticComponent<React.PropsWithoutRef<ItemData & {
+        children: React.ReactNode;
+        scope: any;
+    }> & React.RefAttributes<ItemElement>>;
+}, (scope: any) => () => ({
+    ref: React.RefObject<ItemElement | null>;
+} & ItemData)[], _radix_ui_react_context.CreateScope];
+
+declare class OrderedDict<K, V> extends Map<K, V> {
+    #private;
+    constructor(iterable?: Iterable<readonly [K, V]> | null | undefined);
+    set(key: K, value: V): this;
+    insert(index: number, key: K, value: V): this;
+    with(index: number, key: K, value: V): OrderedDict<K, V>;
+    before(key: K): [K, V] | undefined;
     /**
-     * Used to force mounting when more control is needed. Useful when
-     * controlling animation with React animation libraries.
+     * Sets a new key-value pair at the position before the given key.
      */
-    forceMount?: true;
+    setBefore(key: K, newKey: K, value: V): this;
+    after(key: K): [K, V] | undefined;
+    /**
+     * Sets a new key-value pair at the position after the given key.
+     */
+    setAfter(key: K, newKey: K, value: V): this;
+    first(): [K, V] | undefined;
+    last(): [K, V] | undefined;
+    clear(): void;
+    delete(key: K): boolean;
+    deleteAt(index: number): boolean;
+    at(index: number): V | undefined;
+    entryAt(index: number): [K, V] | undefined;
+    indexOf(key: K): number;
+    keyAt(index: number): K | undefined;
+    from(key: K, offset: number): V | undefined;
+    keyFrom(key: K, offset: number): K | undefined;
+    find(predicate: (entry: [K, V], index: number, dictionary: OrderedDict<K, V>) => boolean, thisArg?: any): [K, V] | undefined;
+    findIndex(predicate: (entry: [K, V], index: number, dictionary: OrderedDict<K, V>) => boolean, thisArg?: any): number;
+    filter<KK extends K, VV extends V>(predicate: (entry: [K, V], index: number, dict: OrderedDict<K, V>) => entry is [KK, VV], thisArg?: any): OrderedDict<KK, VV>;
+    filter(predicate: (entry: [K, V], index: number, dictionary: OrderedDict<K, V>) => unknown, thisArg?: any): OrderedDict<K, V>;
+    map<U>(callbackfn: (entry: [K, V], index: number, dictionary: OrderedDict<K, V>) => U, thisArg?: any): OrderedDict<K, U>;
+    reduce(callbackfn: (previousValue: [K, V], currentEntry: [K, V], currentIndex: number, dictionary: OrderedDict<K, V>) => [K, V]): [K, V];
+    reduce(callbackfn: (previousValue: [K, V], currentEntry: [K, V], currentIndex: number, dictionary: OrderedDict<K, V>) => [K, V], initialValue: [K, V]): [K, V];
+    reduce<U>(callbackfn: (previousValue: U, currentEntry: [K, V], currentIndex: number, dictionary: OrderedDict<K, V>) => U, initialValue: U): U;
+    reduceRight(callbackfn: (previousValue: [K, V], currentEntry: [K, V], currentIndex: number, dictionary: OrderedDict<K, V>) => [K, V]): [K, V];
+    reduceRight(callbackfn: (previousValue: [K, V], currentEntry: [K, V], currentIndex: number, dictionary: OrderedDict<K, V>) => [K, V], initialValue: [K, V]): [K, V];
+    reduceRight<U>(callbackfn: (previousValue: [K, V], currentValue: U, currentIndex: number, dictionary: OrderedDict<K, V>) => U, initialValue: U): U;
+    toSorted(compareFn?: (a: [K, V], b: [K, V]) => number): OrderedDict<K, V>;
+    toReversed(): OrderedDict<K, V>;
+    toSpliced(start: number, deleteCount?: number): OrderedDict<K, V>;
+    toSpliced(start: number, deleteCount: number, ...items: [K, V][]): OrderedDict<K, V>;
+    slice(start?: number, end?: number): OrderedDict<K, V>;
+    every(predicate: (entry: [K, V], index: number, dictionary: OrderedDict<K, V>) => unknown, thisArg?: any): boolean;
+    some(predicate: (entry: [K, V], index: number, dictionary: OrderedDict<K, V>) => unknown, thisArg?: any): boolean;
 }
-declare const CheckboxIndicator: React.ForwardRefExoticComponent<CheckboxIndicatorProps & React.RefAttributes<HTMLSpanElement>>;
-type InputProps = React.ComponentPropsWithoutRef<typeof Primitive.input>;
-interface CheckboxBubbleInputProps extends Omit<InputProps, 'checked'> {
-}
-declare const CheckboxBubbleInput: React.ForwardRefExoticComponent<CheckboxBubbleInputProps & React.RefAttributes<HTMLInputElement>>;
 
-export { Checkbox, CheckboxIndicator, type CheckboxIndicatorProps, type CheckboxProps, type CheckedState, CheckboxIndicator as Indicator, Checkbox as Root, createCheckboxScope, CheckboxBubbleInput as unstable_BubbleInput, CheckboxBubbleInput as unstable_CheckboxBubbleInput, type CheckboxBubbleInputProps as unstable_CheckboxBubbleInputProps, CheckboxProvider as unstable_CheckboxProvider, type CheckboxProviderProps as unstable_CheckboxProviderProps, CheckboxTrigger as unstable_CheckboxTrigger, type CheckboxTriggerProps as unstable_CheckboxTriggerProps, CheckboxProvider as unstable_Provider, CheckboxTrigger as unstable_Trigger };
+type SlotProps = React.ComponentPropsWithoutRef<typeof Slot>;
+interface CollectionProps extends SlotProps {
+    scope: any;
+}
+interface BaseItemData {
+    id?: string;
+}
+type ItemDataWithElement<ItemData extends BaseItemData, ItemElement extends HTMLElement> = ItemData & {
+    element: ItemElement;
+};
+type ItemMap<ItemElement extends HTMLElement, ItemData extends BaseItemData> = OrderedDict<ItemElement, ItemDataWithElement<ItemData, ItemElement>>;
+declare function createCollection<ItemElement extends HTMLElement, ItemData extends BaseItemData = BaseItemData>(name: string): readonly [{
+    readonly Provider: React.FC<{
+        children?: React.ReactNode;
+        scope: any;
+        state?: [ItemMap: ItemMap<ItemElement, ItemData>, SetItemMap: React.Dispatch<React.SetStateAction<ItemMap<ItemElement, ItemData>>>];
+    }>;
+    readonly Slot: React.ForwardRefExoticComponent<CollectionProps & React.RefAttributes<HTMLElement>>;
+    readonly ItemSlot: React.ForwardRefExoticComponent<React.PropsWithoutRef<ItemData & {
+        children: React.ReactNode;
+        scope: any;
+    }> & React.RefAttributes<ItemElement>>;
+}, {
+    createCollectionScope: _radix_ui_react_context.CreateScope;
+    useCollection: (scope: any) => ItemMap<ItemElement, ItemData>;
+    useInitCollection: () => [ItemMap<ItemElement, ItemData>, React.Dispatch<React.SetStateAction<ItemMap<ItemElement, ItemData>>>];
+}];
+
+export { type CollectionProps$1 as CollectionProps, createCollection$1 as createCollection, type CollectionProps$1 as unstable_CollectionProps, createCollection as unstable_createCollection };
