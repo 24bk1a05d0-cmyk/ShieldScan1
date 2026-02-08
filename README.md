@@ -1,22 +1,19 @@
-# ShieldScan - V2.0
+# @babel/runtime
 
-ShieldScan is a premium Chrome Extension that unmasks dark patterns and psychological manipulation on the web in real-time.
+> babel's modular runtime helpers
 
-## 🚀 Installation
+See our website [@babel/runtime](https://babeljs.io/docs/babel-runtime) for more information.
 
-1.  Open Chrome and navigate to `chrome://extensions/`.
-2.  Enable **Developer Mode**.
-3.  Click **Load unpacked**.
-4.  Select the `/extension` directory.
-5.  Pin **ShieldScan** to your toolbar.
+## Install
 
-## ✨ Features
+Using npm:
 
--   **Neural Audit**: Scans every page load in <1.2s.
--   **Safety Index**: Instant 0-100 score for any website.
--   **Pattern Recognition**: Detects 15+ common dark patterns.
--   **Privacy Local**: No data ever leaves your device.
--   **Keyboard Shortcut**: `Ctrl+Shift+S` (Mac: `Cmd+Shift+S`).
+```sh
+npm install --save @babel/runtime
+```
 
----
-*Created for the Ethical Web Initiative.*
+or using yarn:
+
+```sh
+yarn add @babel/runtime
+```
